@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="common_16">16dp</dimen>
+
+    <dimen name="item_currency_height">100dp</dimen>
+    <dimen name="item_currency_photo_size">60dp</dimen>
+    <dimen name="item_currency_title_size">18sp</dimen>
+    <dimen name="item_currency_subtitle_size">14sp</dimen>
+    <dimen name="common_8">8dp</dimen>
+</resources>
