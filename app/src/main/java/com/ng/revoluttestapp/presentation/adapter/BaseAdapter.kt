@@ -24,8 +24,8 @@ open class BaseAdapter<T : BaseItem>(delegateManager: AdapterDelegatesManager<Li
     }
 
     open class DiffUtilBase<T : BaseItem>(
-        private val newList: List<T>,
-        private val oldList: List<T>
+        protected val newList: List<T>,
+        protected val oldList: List<T>
     ) : DiffUtil.Callback() {
 
         override fun getOldListSize() = oldList.size

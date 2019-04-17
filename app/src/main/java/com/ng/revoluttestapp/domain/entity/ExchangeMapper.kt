@@ -8,7 +8,7 @@ class ExchangeMapper(private val mapper: Mapper<CurrencyRate, CurrencyEntity>) :
         return ExchangeEntity(
             selectedCurrency = CurrencyEntity(
                 currencyName = from.base,
-                rate = 1.0,
+                rate = CurrencyEntity.DEFAULT_RATE,
                 isSelect = true
             ),
             currencies = from.rates.map { mapper.map(it) }

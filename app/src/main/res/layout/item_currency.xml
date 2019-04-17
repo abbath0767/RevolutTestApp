@@ -10,6 +10,7 @@
             android:layout_width="@dimen/item_currency_photo_size"
             android:layout_height="@dimen/item_currency_photo_size"
             android:layout_marginRight="@dimen/common_16"
+            android:gravity="center"
             android:text="Add Photo View pls"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"/>
@@ -47,10 +48,12 @@
             android:textSize="@dimen/item_currency_title_size"
             android:textColor="@android:color/black"
             android:layout_alignParentRight="true"
+            android:hint="@string/zero"
+            android:focusableInTouchMode="true"
             android:layout_centerVertical="true"
             android:maxLines="1"
-            android:maxLength="10"
-            android:inputType="number"
+            android:maxLength="6"
+            android:inputType="numberDecimal"
             tools:text="1234.56"/>
 
 </RelativeLayout>

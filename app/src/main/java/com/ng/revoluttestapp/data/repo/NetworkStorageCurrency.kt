@@ -4,7 +4,6 @@ import com.ng.revoluttestapp.data.api.Api
 import com.ng.revoluttestapp.data.model.ExchangeData
 import com.ng.revoluttestapp.domain.entity.ExchangeEntity
 import com.ng.revoluttestapp.domain.entity.Mapper
-import com.ng.revoluttestapp.util.TimberExtension.d
 import io.reactivex.Observable
 
 class NetworkStorageCurrency(
@@ -18,12 +17,6 @@ class NetworkStorageCurrency(
             api.getExchangeRateDefault()
         } else {
             api.getExchangeRate(selectedCurrency)
-        }
-            .doOnNext {
-                d { "on next: $it" }
-            }.doOnError {
-                d { "error: $it" }
-            }
-            .map { mapper.map(it) }
+        }.map { mapper.map(it) }
     }
 }

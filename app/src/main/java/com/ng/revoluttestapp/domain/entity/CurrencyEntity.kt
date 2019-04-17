@@ -7,5 +7,9 @@ data class CurrencyEntity(
     val rate: Double,
     val isSelect: Boolean
 ) : BaseItem {
-    override val id get() = currencyName
+    override val id = currencyName
+
+    companion object {
+        const val DEFAULT_RATE = 1.0
+    }
 }
