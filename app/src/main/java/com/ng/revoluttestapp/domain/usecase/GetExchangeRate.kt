@@ -8,7 +8,6 @@ class GetExchangeRate(
     transformer: Transformer<ExchangeEntity>,
     private val currencyRepository: CurrencyRepository
 ) : UseCaseRepeatable<ExchangeEntity>(transformer) {
-//) : UseCase<ExchangeEntity>(transformer) {
 
     companion object {
         const val KEY_SELECTED_CURRENCY = "KEY_SELECTED_CURRENCY"

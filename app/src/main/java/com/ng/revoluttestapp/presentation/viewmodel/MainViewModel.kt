@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import com.ng.revoluttestapp.domain.entity.CurrencyEntity
 import com.ng.revoluttestapp.domain.entity.ExchangeEntity
 import com.ng.revoluttestapp.domain.usecase.GetExchangeRate
-import com.ng.revoluttestapp.util.TimberExtension.e
 
 class MainViewModel(private val getExchangeRate: GetExchangeRate) : BaseViewModel() {
 
@@ -19,7 +18,7 @@ class MainViewModel(private val getExchangeRate: GetExchangeRate) : BaseViewMode
             getExchangeRate.observable()
                 .subscribe(
                     { receiveData(it) },
-                    { e { "error: $it" } }
+                    { receiveError(it) }
                 )
         )
     }
@@ -60,7 +59,7 @@ class MainViewModel(private val getExchangeRate: GetExchangeRate) : BaseViewMode
             getExchangeRate.observable(mapOf(GetExchangeRate.KEY_SELECTED_CURRENCY to currency.currencyName))
                 .subscribe(
                     { receiveData(it) },
-                    { e { "error: $it" } }
+                    { receiveError(it) }
                 )
         )
     }
@@ -79,5 +78,15 @@ class MainViewModel(private val getExchangeRate: GetExchangeRate) : BaseViewMode
                 exchangeEntity = exchange
             )
         }
+    }
+
+    private fun receiveError(error: Throwable) {
+        viewState.value = MainViewState(
+            error = error
+        )
+    }
+
+    fun reload() {
+        loadData()
     }
 }

@@ -1,7 +1,5 @@
 package com.ng.revoluttestapp.data.model
 
-import com.google.gson.annotations.SerializedName
-
 data class ExchangeData(
     val base: String,
     val date: String,

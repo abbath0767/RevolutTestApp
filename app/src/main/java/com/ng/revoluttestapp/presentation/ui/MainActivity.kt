@@ -2,6 +2,7 @@ package com.ng.revoluttestapp.presentation.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -44,6 +45,8 @@ class MainActivity : AppCompatActivity() {
             loadData()
             viewState.observe(this@MainActivity, Observer { receiveViewState(it) })
         }
+
+        retry_button.setOnClickListener { viewModel.reload() }
     }
 
     private fun intiRecycler() {
@@ -70,7 +73,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun receiveViewState(viewState: MainViewState?) {
-        viewState?.let { state -> state.exchangeEntity?.let { exchangeData -> setViewState(exchangeData) } }
+        viewState?.let { state ->
+            if (state.error == null && state.exchangeEntity != null) {
+                showErrorViews(false)
+                setViewState(state.exchangeEntity)
+            } else if (state.error != null) {
+                showErrorViews(true)
+                setErrorState(state.error)
+            }
+        }
+    }
+
+    private fun setErrorState(error: Throwable) {
+        error_text_view.text = "error: ${error.message}"
     }
 
     private fun setViewState(exchangeData: ExchangeEntity) {
@@ -95,6 +110,26 @@ class MainActivity : AppCompatActivity() {
     private fun onCurrencyClick(currency: CurrencyEntity) = viewModel.onCurrencyClick(currency)
 
     private fun onRateChange(newRate: Double) = viewModel.onRateChange(newRate)
+
+    private fun showErrorViews(errorViewsIsVisible: Boolean) {
+        if (errorViewsIsVisible) {
+            if (error_text_view.visibility == View.GONE) {
+                error_text_view.visibility = View.VISIBLE
+                retry_button.visibility = View.VISIBLE
+            }
+            if (main_recycler.visibility != View.GONE) {
+                main_recycler.visibility = View.GONE
+            }
+        } else {
+            if (error_text_view.visibility != View.GONE) {
+                error_text_view.visibility = View.GONE
+                retry_button.visibility = View.GONE
+            }
+            if (main_recycler.visibility != View.VISIBLE) {
+                main_recycler.visibility = View.VISIBLE
+            }
+        }
+    }
 
     private fun showSoftKeyboard(show: Boolean) {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

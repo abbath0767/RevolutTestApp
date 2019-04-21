@@ -4,4 +4,5 @@
     <string name="empty_currency_name">Empty currency name,,,</string>
     <string name="common_currency_photo_place">Currency Photo Place</string>
     <string name="zero">0</string>
+    <string name="retry">Retry</string>
 </resources>
